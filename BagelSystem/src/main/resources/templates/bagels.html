@@ -1,0 +1,39 @@
+<!DOCType HTML>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<title>Please Place Your Order</title>
+</head>
+<body>
+	<h1>Create Your Bagel</h1>
+ 
+	<form  action="" method="post" th:object="${bagel}">
+		<fieldset>
+			<legend>Bagel Type</legend>
+			Size: 
+			<select th:field="*{size}">
+				<option value=""></option>
+				<option th:each="bagelSize : ${bagelSizes}"
+					th:value="${bagelSize.description}"
+					th:text="${bagelSize.description}">Bagel Size Goes Here</option>
+					
+			</select> <br /> Type: <select th:field="*{breadType}">
+				<option value=""></option>
+				<option th:each="bagelType : ${bagelTypes}"
+					th:value="${bagelType.description}"
+					th:text="${bagelType.description}">Bread Type Goes Here</option>
+			</select>
+		</fieldset>
+		<br />
+		<fieldset>
+			<legend>Bagel Toppings</legend>
+			<div th:each="topping : ${toppings}">
+				<input type="checkbox" th:value="${topping.id}"
+					th:field="*{toppings}" /> <label th:for="${#ids.prev('toppings')}"
+					th:text="${topping.description}"></label>
+			</div>
+		</fieldset>
+		<button>Add Bagel to Order</button>
+	</form>
+	
+</body>
+</html>
